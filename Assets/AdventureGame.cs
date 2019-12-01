@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class AdventureGame : MonoBehaviour
 {
-
+    // Testing GIT by making this comment
     [SerializeField] Text textComponent; // this variable is set in the Unity client itself. The SerializeField property allows us to do this.
     [SerializeField] State startingState;
     Player playerCharacter;
