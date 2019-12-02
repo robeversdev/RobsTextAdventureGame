@@ -18,6 +18,10 @@ public class State : ScriptableObject
         return storyText[numberOfTimesEntered];
     }
 
+    /// <summary>
+    /// Return the Rooms attached to the context Room
+    /// </summary>
+    /// <returns></returns>
     public State[] GetNextStates()
     {
         return nextStates;
@@ -33,13 +37,15 @@ public class State : ScriptableObject
         return numberOfTimesEntered;
     }
 
-    public string EnterRoom()
+    /// <summary>
+    /// Informs the room it has been entered and updates the current Room text based on how many times the room was entered 
+    /// </summary>
+    /// <returns></returns>
+    public void EnterRoom()
     {
-        string currentText = GetStateStory();
         if(storyText.Length -1 > numberOfTimesEntered)
             numberOfTimesEntered++;
-
-        return currentText;
+        Debug.Log("Entered the room: " + numberOfTimesEntered + " times");
     }
 
 
