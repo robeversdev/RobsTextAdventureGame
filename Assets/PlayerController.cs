@@ -12,6 +12,7 @@ public class PlayerController
     {
         ROOM,
         INVENTORY,
+        ITEM,
     }
 
     private ActiveScreen activeScreen;
@@ -34,12 +35,32 @@ public class PlayerController
             case ActiveScreen.INVENTORY:
                 ListenForInventoryInput();
                 break;
+            case ActiveScreen.ITEM:
+                ListenForItemInput();
+                break;
         }
 
-        if (activeScreen == ActiveScreen.ROOM)
-            return player.GetRoomPlayerIsIn().GetStateStory();
-        else
-            return player.GetPlayerInventory().BuildInventoryText();
+        return BuildTextForScreen();
+    }
+
+    /// <summary>
+    /// Checks what the active screen is and returns the text associated with it
+    /// </summary>
+    /// <returns></returns>
+    private string BuildTextForScreen()
+    {
+        switch(activeScreen)
+        {
+            case ActiveScreen.ROOM:
+                return player.GetRoomPlayerIsIn().GetStateStory();
+            case ActiveScreen.INVENTORY:
+                return player.GetPlayerInventory().BuildInventoryText();
+            case ActiveScreen.ITEM:
+                return player.GetPlayerInventory().PrintItemPage(player.GetPlayerInventory().GetOpenItemSlot());
+
+        }
+
+        return "";
     }
 
     /// <summary>
@@ -80,6 +101,20 @@ public class PlayerController
         if (Input.GetKeyDown(KeyCode.I))
         {
             activeScreen = ActiveScreen.ROOM;
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            activeScreen = ActiveScreen.ITEM;
+            player.GetPlayerInventory().OpenItemSlot(Assets.ItemSlotBeingExamined.SLOT1);
+            //player.GetPlayerInventory().PrintItemPage(1);
+        }
+    }
+    
+    public void ListenForItemInput()
+    {
+        if(Input.GetKeyDown(KeyCode.B))
+        {
+            activeScreen = ActiveScreen.INVENTORY;
         }
     }
 }

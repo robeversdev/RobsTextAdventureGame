@@ -18,7 +18,6 @@ public class Player
         playerInventory = new Inventory();
         routesToComplete =  new List<string>(new string[] { "North", "South", "East", "West" });
         roomPlayerIsIn = startingRoom;
-        playerInventory.PopulateInventoryWithTestValues(); // Test code to pre-populate inventory with silly objects
         controller = new PlayerController(this);
     }
 

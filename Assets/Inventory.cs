@@ -1,17 +1,21 @@
-﻿using System.Collections;
+﻿using Assets;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory 
 {
+
     List<InanimateObject> itemsInInventory;
+    ItemSlotBeingExamined openSlot;
 
     public Inventory()
     {
         itemsInInventory = new List<InanimateObject>();
+        PopulateInventoryWithTestValues(); // Test code to pre-populate inventory with silly objects
     }
 
-    public void PopulateInventoryWithTestValues()
+    private void PopulateInventoryWithTestValues()
     {
         for(int i = 0; i <= 5; i++)
         {
@@ -57,7 +61,7 @@ public class Inventory
 
     public string BuildInventoryText()
     {
-        return "Items in inventory: " + PrintOutInventory();
+        return "Inventory \n" + PrintOutInventory();
     }
 
     private string PrintOutInventoryActions()
@@ -67,14 +71,39 @@ public class Inventory
 
     private string PrintOutInventory()
     {
+
         string printedList = "";
-        foreach (InanimateObject item in GetAllItemsInInventory())
+        int numberOfItem = 1;
+
+        if (GetAllItemsInInventory().Count == 0)
+            return "You have no items in your inventory.";
+
+        foreach(InanimateObject item in GetAllItemsInInventory())
         {
-            if (itemsInInventory.IndexOf(item) == itemsInInventory.Count - 1) // if this is the last item then we don't need a comma separator
-                printedList += item.GetItemName();
-            else printedList = printedList + item.GetItemName() + ", ";
+            printedList = printedList + "\n\n" + numberOfItem + ". " + item.GetItemName();
+            numberOfItem++;
         }
 
         return printedList;
+    }
+
+    public string PrintItemPage(ItemSlotBeingExamined itemSlot)
+    {
+        switch(itemSlot)
+        {
+            case ItemSlotBeingExamined.SLOT1:
+                return itemsInInventory[0].ExamineObject();              
+        }
+        return "";
+    }
+
+    public void OpenItemSlot(ItemSlotBeingExamined slotToOpen)
+    {
+        openSlot = slotToOpen;
+    }
+
+    public ItemSlotBeingExamined GetOpenItemSlot()
+    {
+        return openSlot;
     }
 }
