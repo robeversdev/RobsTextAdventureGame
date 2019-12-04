@@ -59,4 +59,13 @@ public class Player
         return controller;
     }
 
+    /// <summary>
+    /// Returns the Inventory object belonging to the Player
+    /// </summary>
+    /// <returns></returns>
+    public Inventory GetPlayerInventory()
+    {
+        return playerInventory;
+    }
+
 }

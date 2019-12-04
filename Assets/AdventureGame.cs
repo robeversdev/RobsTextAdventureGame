@@ -21,8 +21,7 @@ public class AdventureGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerCharacter.GetPlayerController().ListenForRoomInput();
-        textComponent.text = playerCharacter.GetRoomPlayerIsIn().GetStateStory();
+        textComponent.text = playerCharacter.GetPlayerController().ListenToAllInput();
     }
 
 }
