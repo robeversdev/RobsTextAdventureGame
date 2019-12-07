@@ -6,6 +6,8 @@ public class InanimateObject : InteractableObject
 {
     public InanimateObject(string description, string name) : base(description, name) { }
 
+    private bool singleUse = true;
+
     public string UseItem()
     {
         return "You have used " + this.ObjectName;

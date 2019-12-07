@@ -13,6 +13,8 @@ public class PlayerController
         ROOM,
         INVENTORY,
         ITEM,
+        ITEMUSE,
+        ITEMDROP, 
     }
 
     private ActiveScreen activeScreen;
@@ -38,6 +40,9 @@ public class PlayerController
             case ActiveScreen.ITEM:
                 ListenForItemInput();
                 break;
+            case ActiveScreen.ITEMUSE:
+                ListenForItemUseInput();
+                break;
         }
 
         return BuildTextForScreen();
@@ -57,6 +62,8 @@ public class PlayerController
                 return player.GetPlayerInventory().BuildInventoryText();
             case ActiveScreen.ITEM:
                 return player.GetPlayerInventory().PrintItemPage(player.GetPlayerInventory().GetOpenItemSlot());
+            case ActiveScreen.ITEMUSE:
+                return player.GetPlayerInventory().UseItemInOpenSlot();
 
         }
 
@@ -66,7 +73,7 @@ public class PlayerController
     /// <summary>
     /// Listen for input from the keyboard when inside a room
     /// </summary>
-    public void ListenForRoomInput()
+    private void ListenForRoomInput()
     {
         var nextStates = player.GetRoomPlayerIsIn().GetNextStates();
 
@@ -92,7 +99,7 @@ public class PlayerController
     /// <summary>
     /// Listens for input while on the inventory screen
     /// </summary>
-    public void ListenForInventoryInput()
+    private void ListenForInventoryInput()
     {
         //TODO build inventory actions like examine, use and drop
         // Probably need to limit inventory space to start with
@@ -129,7 +136,7 @@ public class PlayerController
         }
     }
     
-    public void ListenForItemInput()
+    private void ListenForItemInput()
     {
         if(Input.GetKeyDown(KeyCode.B))
         {
@@ -137,7 +144,13 @@ public class PlayerController
         }
         else if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            player.GetPlayerInventory().UseItemInOpenSlot();
+            activeScreen = ActiveScreen.ITEMUSE;
         }
+    }
+
+    private void ListenForItemUseInput()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+           activeScreen = ActiveScreen.INVENTORY;    
     }
 }
