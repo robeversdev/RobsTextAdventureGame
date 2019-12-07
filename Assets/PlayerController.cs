@@ -102,11 +102,30 @@ public class PlayerController
         {
             activeScreen = ActiveScreen.ROOM;
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha1))
+        else if(Input.GetKeyDown(KeyCode.Alpha1) && player.GetPlayerInventory().GetNumberOfFilledSlots() >= 1)
         {
             activeScreen = ActiveScreen.ITEM;
             player.GetPlayerInventory().OpenItemSlot(Assets.ItemSlotBeingExamined.SLOT1);
-            //player.GetPlayerInventory().PrintItemPage(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && player.GetPlayerInventory().GetNumberOfFilledSlots() >= 2)
+        {
+            activeScreen = ActiveScreen.ITEM;
+            player.GetPlayerInventory().OpenItemSlot(Assets.ItemSlotBeingExamined.SLOT2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && player.GetPlayerInventory().GetNumberOfFilledSlots() >= 3)
+        {
+            activeScreen = ActiveScreen.ITEM;
+            player.GetPlayerInventory().OpenItemSlot(Assets.ItemSlotBeingExamined.SLOT3);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && player.GetPlayerInventory().GetNumberOfFilledSlots() >= 4)
+        {
+            activeScreen = ActiveScreen.ITEM;
+            player.GetPlayerInventory().OpenItemSlot(Assets.ItemSlotBeingExamined.SLOT4);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5) && player.GetPlayerInventory().GetNumberOfFilledSlots() >= 5)
+        {
+            activeScreen = ActiveScreen.ITEM;
+            player.GetPlayerInventory().OpenItemSlot(Assets.ItemSlotBeingExamined.SLOT5);
         }
     }
     
@@ -115,6 +134,10 @@ public class PlayerController
         if(Input.GetKeyDown(KeyCode.B))
         {
             activeScreen = ActiveScreen.INVENTORY;
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            player.GetPlayerInventory().UseItemInOpenSlot();
         }
     }
 }

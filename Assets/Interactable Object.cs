@@ -22,11 +22,17 @@ public abstract class InteractableObject
 
     public string ExamineObject()
     {
-        return ObjectDescription;
+        return ObjectDescription + "\n\n\n\n" + GetObjectActions();
     }
 
     public string GetItemName()
     {
         return ObjectName;
     }
+
+    /// <summary>
+    /// The available actions to interact with this object
+    /// </summary>
+    /// <returns></returns>
+    protected abstract string GetObjectActions();
 }

@@ -17,7 +17,7 @@ public class Inventory
 
     private void PopulateInventoryWithTestValues()
     {
-        for(int i = 0; i <= 5; i++)
+        for(int i = 0; i <= 4; i++)
         {
             itemsInInventory.Add(new InanimateObject("This is the description for Object" + i, "TestObject" + i));
         }
@@ -36,6 +36,11 @@ public class Inventory
     public List<InanimateObject> GetAllItemsInInventory()
     {
         return itemsInInventory;
+    }
+
+    public int GetNumberOfFilledSlots()
+    {
+        return itemsInInventory.Count;
     }
 
     public InanimateObject GetSpecificInventorySlot(int index)
@@ -64,11 +69,6 @@ public class Inventory
         return "Inventory \n" + PrintOutInventory();
     }
 
-    private string PrintOutInventoryActions()
-    {
-        return "1. Examine an Item   2. Use an Item";
-    }
-
     private string PrintOutInventory()
     {
 
@@ -92,7 +92,15 @@ public class Inventory
         switch(itemSlot)
         {
             case ItemSlotBeingExamined.SLOT1:
-                return itemsInInventory[0].ExamineObject();              
+                return itemsInInventory[0].ExamineObject();
+            case ItemSlotBeingExamined.SLOT2:
+                return itemsInInventory[1].ExamineObject();
+            case ItemSlotBeingExamined.SLOT3:
+                return itemsInInventory[2].ExamineObject();
+            case ItemSlotBeingExamined.SLOT4:
+                return itemsInInventory[3].ExamineObject();
+            case ItemSlotBeingExamined.SLOT5:
+                return itemsInInventory[4].ExamineObject();
         }
         return "";
     }
@@ -105,5 +113,23 @@ public class Inventory
     public ItemSlotBeingExamined GetOpenItemSlot()
     {
         return openSlot;
+    }
+
+    public string UseItemInOpenSlot()
+    {
+        switch (openSlot)
+        {
+            case ItemSlotBeingExamined.SLOT1:
+                return itemsInInventory[0].UseItem();
+            case ItemSlotBeingExamined.SLOT2:
+                return itemsInInventory[1].UseItem();
+            case ItemSlotBeingExamined.SLOT3:
+                return itemsInInventory[2].UseItem();
+            case ItemSlotBeingExamined.SLOT4:
+                return itemsInInventory[3].UseItem();
+            case ItemSlotBeingExamined.SLOT5:
+                return itemsInInventory[4].UseItem();
+        }
+        return "";
     }
 }

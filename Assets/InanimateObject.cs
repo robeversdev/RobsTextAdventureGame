@@ -10,4 +10,9 @@ public class InanimateObject : InteractableObject
     {
         return "You have used " + this.ObjectName;
     }
+
+    protected override string GetObjectActions()
+    {
+        return "1. Use \t 2. Drop ";
+    }
 }
