@@ -11,6 +11,7 @@ public class PlayerController
     private enum ActiveScreen
     {
         ROOM,
+        ROOMSEARCH,
         INVENTORY,
         ITEM,
         ITEMUSE,
@@ -43,6 +44,9 @@ public class PlayerController
             case ActiveScreen.ITEMUSE:
                 ListenForItemUseInput();
                 break;
+            case ActiveScreen.ROOMSEARCH:
+                ListenForItemUseInput();
+                break;
         }
 
         return BuildTextForScreen();
@@ -58,12 +62,15 @@ public class PlayerController
         {
             case ActiveScreen.ROOM:
                 return player.GetRoomPlayerIsIn().GetStateStory();
+            case ActiveScreen.ROOMSEARCH:
+                return player.GetRoomPlayerIsIn().GetSearchText();
             case ActiveScreen.INVENTORY:
                 return player.GetPlayerInventory().BuildInventoryText();
             case ActiveScreen.ITEM:
                 return player.GetPlayerInventory().PrintItemPage(player.GetPlayerInventory().GetOpenItemSlot());
             case ActiveScreen.ITEMUSE:
                 return player.GetPlayerInventory().UseItemInOpenSlot();
+
 
         }
 
@@ -92,6 +99,10 @@ public class PlayerController
         else if (Input.GetKeyDown(KeyCode.I) && activeScreen == ActiveScreen.ROOM)
         {
             activeScreen = ActiveScreen.INVENTORY;
+        }
+        else if (Input.GetKeyDown(KeyCode.S) && activeScreen == ActiveScreen.ROOM)
+        {
+            activeScreen = ActiveScreen.ROOMSEARCH;
         }
 
 
@@ -152,5 +163,11 @@ public class PlayerController
     {
         if (Input.GetKeyDown(KeyCode.B))
            activeScreen = ActiveScreen.INVENTORY;    
+    }
+
+    private void ListenForSearchRoomInput()
+    {
+        if (Input.GetKeyDown(KeyCode.B))
+            activeScreen = ActiveScreen.ROOM;
     }
 }
