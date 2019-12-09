@@ -45,8 +45,9 @@ public class PlayerController
                 ListenForItemUseInput();
                 break;
             case ActiveScreen.ROOMSEARCH:
-                ListenForItemUseInput();
+                ListenForSearchRoomInput();
                 break;
+
         }
 
         return BuildTextForScreen();

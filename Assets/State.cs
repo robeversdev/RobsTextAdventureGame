@@ -11,7 +11,7 @@ public class State : ScriptableObject
 
     [SerializeField] State[] nextStates;
 
-    List<InteractableObject> objectsInRoom;
+    [SerializeField] List<InteractableObject> objectsInRoom = new List<InteractableObject>();
 
     private int numberOfTimesEntered = 0;
 
