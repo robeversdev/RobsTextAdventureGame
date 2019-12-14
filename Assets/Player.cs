@@ -8,10 +8,10 @@ public class Player
     string genderOfPlayer;
     Inventory playerInventory;
     List<string> routesToComplete;
-    State roomPlayerIsIn;
+    Room roomPlayerIsIn;
     PlayerController controller;
 
-    public Player(State startingRoom)
+    public Player(Room startingRoom)
     {
         playerName = "Rin";
         genderOfPlayer = "Female";
@@ -38,12 +38,12 @@ public class Player
 
     }
 
-    public State GetRoomPlayerIsIn()
+    public Room GetRoomPlayerIsIn()
     {
         return roomPlayerIsIn;
     }
 
-    public void MoveIntoRoom(State newRoom)
+    public void MoveIntoRoom(Room newRoom)
     {
         roomPlayerIsIn = newRoom;
         roomPlayerIsIn.EnterRoom();

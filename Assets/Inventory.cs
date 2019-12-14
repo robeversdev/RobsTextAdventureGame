@@ -12,7 +12,7 @@ public class Inventory
     public Inventory()
     {
         itemsInInventory = new List<InanimateObject>();
-        PopulateInventoryWithTestValues(); // Test code to pre-populate inventory with silly objects
+        //PopulateInventoryWithTestValues(); // Test code to pre-populate inventory with silly objects
     }
 
     private void PopulateInventoryWithTestValues()

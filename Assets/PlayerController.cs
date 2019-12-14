@@ -105,6 +105,10 @@ public class PlayerController
         {
             activeScreen = ActiveScreen.ROOMSEARCH;
         }
+        else if (Input.GetKeyDown(KeyCode.T) && activeScreen == ActiveScreen.ROOM)
+        {
+            player.GetRoomPlayerIsIn().PopulateObjectsInRoom();
+        }
 
 
     }
@@ -170,5 +174,11 @@ public class PlayerController
     {
         if (Input.GetKeyDown(KeyCode.B))
             activeScreen = ActiveScreen.ROOM;
+        else if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            player.GetPlayerInventory().PickUpItem(player.GetRoomPlayerIsIn().GetObjectInRoom(0));
+            player.GetRoomPlayerIsIn().RemoveObjectInRoom(0);
+        }
+
     }
 }

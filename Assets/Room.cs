@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "State")]
-public class State : ScriptableObject
+public class Room : ScriptableObject
 {
     [TextArea(10,14)] [SerializeField] string[] storyText;
 
     string searchText;
 
-    [SerializeField] State[] nextStates;
+    [SerializeField] Room[] nextStates;
 
-    [SerializeField] List<InteractableObject> objectsInRoom = new List<InteractableObject>();
+    [SerializeField] List<InanimateObject> objectsInRoom = new List<InanimateObject>();
 
     private int numberOfTimesEntered = 0;
 
@@ -24,12 +24,12 @@ public class State : ScriptableObject
     /// Return the Rooms attached to the context Room
     /// </summary>
     /// <returns></returns>
-    public State[] GetNextStates()
+    public Room[] GetNextStates()
     {
         return nextStates;
     }
 
-    private void PopulateObjectsInRoom()
+    public void PopulateObjectsInRoom()
     {
         objectsInRoom.Add(new InanimateObject("It's a Large Key", "Large Key"));
     }
@@ -77,6 +77,16 @@ public class State : ScriptableObject
             return "You begin to search for items. \n\n There is nothing worth noting. ";
         }
         return "You begin to search for items. " + "\n\n Which items do you want to interact with? \n" + ListObjectsInRoom();
+    }
+
+    public InanimateObject GetObjectInRoom(int index)
+    {
+        return objectsInRoom[index];
+    }
+
+    public void RemoveObjectInRoom(int index)
+    {
+        objectsInRoom.RemoveAt(index);
     }
 
 
