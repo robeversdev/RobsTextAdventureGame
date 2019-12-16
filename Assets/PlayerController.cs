@@ -8,6 +8,7 @@ using UnityEngine;
 public class PlayerController
 {
     private Player player;
+    private bool isShowing;
     private enum ActiveScreen
     {
         ROOM,
@@ -26,6 +27,11 @@ public class PlayerController
     {
         player = newPlayer;
         activeScreen = ActiveScreen.ROOM;
+    }
+
+    public bool IsGameCanvasShowing()
+    {
+        return isShowing;
     }
 
     public string ListenToAllInput()
@@ -108,6 +114,10 @@ public class PlayerController
         else if (Input.GetKeyDown(KeyCode.T) && activeScreen == ActiveScreen.ROOM)
         {
             player.GetRoomPlayerIsIn().PopulateObjectsInRoom();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && activeScreen == ActiveScreen.ROOM)
+        {
+            isShowing = !isShowing;
         }
 
 

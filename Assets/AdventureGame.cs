@@ -10,6 +10,7 @@ public class AdventureGame : MonoBehaviour
     [SerializeField] Text textComponent; // this variable is set in the Unity client itself. The SerializeField property allows us to do this.
     [SerializeField] Room startingState;
     Player playerCharacter;
+    public GameObject theCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,7 @@ public class AdventureGame : MonoBehaviour
     void Update()
     {
         textComponent.text = playerCharacter.GetPlayerController().ListenToAllInput();
+        //theCanvas.SetActive(playerCharacter.GetPlayerController().IsGameCanvasShowing()); // proof of concept for hiding the canvas
     }
 
 }
